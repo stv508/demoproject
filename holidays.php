@@ -62,7 +62,7 @@ $only_years = mysqli_query($connect, "SELECT  DISTINCT LEFT(date,4) AS `only_yea
                                                                                           <td>" . $count . "</td>
                                                                                           <td>" . $qu_fetch['date'] . "</td>
                                                                                           <td>" . $qu_fetch['reason'] . "</td>
-                                                                                          <td><center><a href='set_holidays_edit.php?holidayid=" . $qu_fetch['s.no'] . "'><i class='fa-regular fa-pen-to-square'></i></i></a></center></td>
+                                                                                          <td><center><a href='set_holidays_edit.php?holidayid=" . $qu_fetch['s.no'] . "'><i class='fa-regular fa-pen-to-square'></i></a></center></td>
                                                                                           <td><center><i class='icon-trash text-danger'></center></td>
                                                                                       </tr>";
                                                                                     $count = $count + 1;

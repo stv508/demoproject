@@ -26,7 +26,7 @@
     <link rel="shortcut icon" href="images/favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- bootstrap -->
-    
+
 
 </head>
 
@@ -62,45 +62,45 @@
                         <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
                             <i class="icon-air-play mx-0"></i>
                         </a> -->
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-                            <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
-                                </div>
-                                <div class="preview-item-content flex-grow">
-                                    <h6 class="preview-subject ellipsis font-weight-normal">David Grey
-                                    </h6>
-                                    <p class="font-weight-light small-text text-muted mb-0">
-                                        The meeting is cancelled
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <img src="images/faces/face2.jpg" alt="image" class="profile-pic">
-                                </div>
-                                <div class="preview-item-content flex-grow">
-                                    <h6 class="preview-subject ellipsis font-weight-normal">Tim Cook
-                                    </h6>
-                                    <p class="font-weight-light small-text text-muted mb-0">
-                                        New product launch
-                                    </p>
-                                </div>
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
-                                </div>
-                                <div class="preview-item-content flex-grow">
-                                    <h6 class="preview-subject ellipsis font-weight-normal"> Johnson
-                                    </h6>
-                                    <p class="font-weight-light small-text text-muted mb-0">
-                                        Upcoming board meeting
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                        <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <img src="images/faces/face4.jpg" alt="image" class="profile-pic">
+                            </div>
+                            <div class="preview-item-content flex-grow">
+                                <h6 class="preview-subject ellipsis font-weight-normal">David Grey
+                                </h6>
+                                <p class="font-weight-light small-text text-muted mb-0">
+                                    The meeting is cancelled
+                                </p>
+                            </div>
+                        </a>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <img src="images/faces/face2.jpg" alt="image" class="profile-pic">
+                            </div>
+                            <div class="preview-item-content flex-grow">
+                                <h6 class="preview-subject ellipsis font-weight-normal">Tim Cook
+                                </h6>
+                                <p class="font-weight-light small-text text-muted mb-0">
+                                    New product launch
+                                </p>
+                            </div>
+                        </a>
+                        <a class="dropdown-item preview-item">
+                            <div class="preview-thumbnail">
+                                <img src="images/faces/face3.jpg" alt="image" class="profile-pic">
+                            </div>
+                            <div class="preview-item-content flex-grow">
+                                <h6 class="preview-subject ellipsis font-weight-normal"> Johnson
+                                </h6>
+                                <p class="font-weight-light small-text text-muted mb-0">
+                                    Upcoming board meeting
+                                </p>
+                            </div>
+                        </a>
+                    </div>
                     </li>
                     <li class="nav-item dropdown mr-4 d-lg-flex d-none">
                         <a class="nav-link count-indicatord-flex align-item s-center justify-content-center" href="#">
@@ -145,47 +145,72 @@
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link" href="home.php">
-                        <i class="icon-box menu-icon"></i>
+                            <i class="icon-box menu-icon"></i>
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="employees.php">
-                        <i class="menu-icon icon-head"></i>
+                            <i class="menu-icon icon-head"></i>
                             <span class="menu-title">Employees</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="">
-                        <i class="fa menu-icon fa-group-arrows-rotate"></i>
+                            <i class="fa menu-icon fa-group-arrows-rotate"></i>
                             <span class="menu-title">Societies</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="">
-                        <i class="fa menu-icon fa-person-digging"></i>
+                            <i class="fa menu-icon fa-person-digging"></i>
                             <span class="menu-title">Works</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="holidays.php">
-                        <i class="fa menu-icon fa-person-walking-luggage"></i>
+                            <i class="fa menu-icon fa-person-walking-luggage"></i>
                             <span class="menu-title">Holidays</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="leaves.php">
-                        <i class="fa menu-icon fa-person-walking-arrow-right"></i>
+                            <i class="fa menu-icon fa-person-walking-arrow-right"></i>
                             <span class="menu-title">Leaves</span>
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="icon-disc menu-icon"></i>
+                            <span class="menu-title">Salary</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="ui-basic">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="create_earn.php">Create Earnings</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="create_dedu.php">Create Deductions</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="salary.php">
+                            <i class="fa menu-icon fa-person-walking-arrow-right"></i>
+                            <span class="menu-title">Salary</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="designation_setup.php">
+                            <i class="fa menu-icon fa-person-walking-arrow-right"></i>
+                            <span class="menu-title">Designation Setup</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="logout.php">
-                        <i class="fa menu-icon fa-right-from-bracket"></i>
+                            <i class="fa menu-icon fa-right-from-bracket"></i>
                             <span class="menu-title">Logout</span>
                         </a>
                     </li>
-                    
+
                     <!-- <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
                             aria-controls="ui-basic">

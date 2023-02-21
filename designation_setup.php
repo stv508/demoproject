@@ -1,0 +1,84 @@
+<?php 
+include("session.php");
+include("header.php")
+?>
+<?php
+$select_desgination =mysqli_query($connect, "SELECT * FROM `emp_designations`");
+?>
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="">Designation Setup</h3>
+                        <hr>
+                        <div class="card">
+                            <div class="card-body">
+                                
+                                    <div class="col-lg-12 stretch-card">
+                                        <div class="card-body">
+                                            <h4 class="">Available Designations</h4>
+                                            <div class="col-sm-3" style="display: flex; justify-content: space-between; float: right; transform: translateY(-40px);">
+                                                <a href="set_holidays.php"><button type="button" class="btn btn-info btn-fw col-lg-12">Create Designations</button></a>
+                                            </div><br><br>
+                                            <div class="main-panel">
+                                                <div class="">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 grid-margin stretch-card">
+                                                            <div class="card">
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th style="width: 200px;">S.No</th>
+                                                                                    <th>Designation</th>
+                                                                                    <th style="width: 100px;"><center>Edit</center></th>
+                                                                                    <th style="width: 100px;"><center>Delete</center></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <?php
+                                                                                $count = 1;
+                                                                                while ($select_desgination_fetch = mysqli_fetch_assoc($select_desgination)) {
+                                                                                    echo "<tr>
+                                                                                          <td>".$count."</td>
+                                                                                          <td>".$select_desgination_fetch['designation_name']."</td>
+                                                                                          <td><center><i class='fa-regular text-info fa-pen-to-square' id=''></i></center></td>
+                                                                                          <td><center><i class='icon-trash text-danger'></center></td>
+                                                                                      </tr>";
+                                                                                    $count = $count + 1;
+                                                                                }
+                                                                                ?>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <?php
+    include("footer.php");
+    ?>
+    </div>
+    
+    <!-- 
+    ArrayList<Integer>list=new ArrayList<>();
+    int arr = list.add(var);
+    ArrayList <Integer>list1=removeDuplicates(list); 
+-->
+
+
