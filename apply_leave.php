@@ -139,7 +139,7 @@ $get = $_GET['empid'];
             //                 empid: empi
             //             },
             //             success: function() {
-            //                 // window.location.replace("emp_pannel.php?empid=<?php echo $get ?>");
+            //                 // window.location.replace("emp_pannel.php?empid=<?php //echo $get ?>");
             //             }
             //         });
             //         alert("Please Wait For HR Approvel");
