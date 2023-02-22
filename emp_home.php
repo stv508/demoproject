@@ -24,27 +24,30 @@ $request_rows = mysqli_num_rows($request);
                 <div class="row flex-grow">
                     <div class="col-sm-12 grid-margin stretch-card">
                         <div class="card">
-                            <!-- <div class="card-body">
-                                <h4 class="card-title">Leave status</h4>
-                                 <p>23% increase in conversion</p>
-                                <h4 class="text-dark font-weight-bold mb-2">Your Leave request has Been </h4>
-                                <canvas id="customers"></canvas> 
-                            </div> -->
+                            <div class="card-body">
+                                <h3 class="card-title">Leave status</h3>
+                                <hr>
+                                 <!-- <p>23% increase in conversion</p> -->
+                                <h4 class="text-dark font-weight-bold mb-2">Waiting For Approval </h4>
+                                <br>
+                                <a href="emp_leave_stat.php"><button type="button" class="btn btn-outline-success btn-icon-text col-sm-12"><i class="fa-regular fa-thumbs-up"></i> &nbsp;See My Requests</button></a>
+                                <!-- <canvas id="customers"></canvas> --> 
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 stretch-card">
+                    <!-- <div class="col-sm-12 stretch-card">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Leave Requests</h4>
                                 <hr>
-                                <!-- <p>6% decrease in earnings</p> -->
-                                <h1 class="text-dark font-weight-bold mb-2"><?php echo $request_rows; ?> <span class="h4"> Requests</span></h1>
+                                <p>6% decrease in earnings</p>
+                                <h1 class="text-dark font-weight-bold mb-2"><?php // echo $request_rows; ?> <span class="h4"> Requests</span></h1>
                                 <br>
                                 <a href="leave_requests.php"><button type="button" class="btn btn-outline-success btn-icon-text col-sm-12"><i class="fa-regular fa-thumbs-up"></i> &nbsp; See All</button></a>
-                                <!-- <canvas id="orders"></canvas> -->
+                                <canvas id="orders"></canvas>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-xl-9 d-flex grid-margin stretch-card">

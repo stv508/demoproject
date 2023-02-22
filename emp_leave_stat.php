@@ -2,7 +2,7 @@
 include("session.php");
 include("header.php");
 include("accept_reject.php");
-$leave_app = mysqli_query($connect, "SELECT emp_leaves.s_no,emp_leaves.emp_id,emp_personal.emp_name,leaves.leave_type,emp_leaves.from_date,emp_leaves.to_date, DATEDIFF(to_date,from_date)+1 As days FROM `emp_leaves`,`emp_personal`,`leaves` WHERE emp_personal.emp_id = emp_leaves.emp_id AND emp_leaves.leave_type=leaves.s_no AND emp_leaves.status=0 AND leaves.status=1 ");
+$leave_app = mysqli_query($connect, "SELECT emp_leaves.s_no,emp_leaves.emp_id,emp_personal.emp_name,leaves.leave_type,emp_leaves.from_date,emp_leaves.to_date, DATEDIFF(to_date,from_date)+1 As days,emp_leaves.status FROM `emp_leaves`,`emp_personal`,`leaves` WHERE emp_personal.emp_id = emp_leaves.emp_id AND emp_leaves.leave_type=leaves.s_no AND leaves.status=1 AND emp_leaves.no_of_days IS NOT NULL; ");
 
 ?>
 <div class="main-panel">
@@ -42,7 +42,7 @@ $leave_app = mysqli_query($connect, "SELECT emp_leaves.s_no,emp_leaves.emp_id,em
                         <center>Status</center>
                       </th>
                     </tr>
-                  </thead>
+                   </thead> 
                   <tbody>
                     <?php
                     $count = 1;
@@ -54,10 +54,25 @@ $leave_app = mysqli_query($connect, "SELECT emp_leaves.s_no,emp_leaves.emp_id,em
                               <td><center>" . $leave_app_fetch['leave_type'] . "</center></td>
                               <td><center>" . $leave_app_fetch['from_date'] . "</center></td>
                               <td><center>" . $leave_app_fetch['to_date'] . "</center></td>
-                              <td><center>" . $leave_app_fetch['days'] . "</center></td>
-                              <td><center><button id='appr-".($count-1)."' value='".$leave_app_fetch['s_no']."' data-toggle='modal' data-target='#Approvel".($count-1)."' type='button'class='btn btn-success btn-rounded btn-icon'><i class='icon-check'></i></button></center></td>
-                              <td><center><button id='den-".($count-1)."' value='".$leave_app_fetch['s_no']."' data-toggle='modal' data-target='#deny".($count-1)."' type='button' class='btn btn-danger btn-rounded btn-icon'><i class='icon-cross'></i></button></center></td>
-                            </tr>";                            
+                              <td><center>" . $leave_app_fetch['days'] . "</center></td>";
+                            //   <td><center>" . $leave_app_fetch['status'] . "</center></td>";
+                              
+                              if($leave_app_fetch['status'] == 1){
+                                echo "<td><center>  <button type='button' class='btn btn-success'>Approved</button></center></td>";
+                              }
+                              else if($leave_app_fetch['status'] == NULL){
+                                  echo "<td><center>  <button type='button' class='btn btn-danger'>Rejected</button></center></td>";
+                                }        
+                              else if($leave_app_fetch['status'] == 0){
+                                echo "<td><center>  <button type='button' class='btn btn-warning'>Pending</button></center></td>";
+                              }
+                            //   else {
+                            //     echo " <td><center> <button type='button' class='btn btn-danger'>Rejected</button></center></td>";
+                            //   }
+                              
+                               
+                            
+                           echo " </tr>";                            
                             AcceptAndReject(($count-1),$leave_app_fetch['s_no']);
                       $count = $count + 1;
                     }

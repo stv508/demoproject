@@ -1,20 +1,21 @@
 <?php
 include("session.php");
 include("header.php");
-echo $todate = $_POST['todate'];
-echo $fromdate  = $_POST['fromdate'];
-echo $leaveid = $_POST['leaveid'];
-echo $empid = $_GET['empid'];
-echo $present_date = date("Y-m-d");
+$todate = $_POST['todate'];
+$fromdate  = $_POST['fromdate'];
+$leaveid = $_POST['leaveid'];
+$empid = $_GET['empid'];
+$present_date = date("Y-m-d");
 $days = mysqli_query($connect, "SELECT DATEDIFF('$todate','$fromdate')+1 AS `days`");
 $days_fetch = mysqli_fetch_assoc($days);
-echo $noofleaves = $days_fetch['days'];
+$noofleaves = $days_fetch['days'];
 // mysqli_query($connect,"START TRANSACTION");
 $leave_insert = mysqli_query($connect, "INSERT INTO `emp_leaves`( `emp_id`, `applies_date`, `leave_type`, `from_date`, `to_date`, `no_of_days`,  `status`) VALUES ('$empid','$present_date', $leaveid,'$fromdate','$todate', $noofleaves , 0 )");
 // mysqli_query($connect,"INSERT INTO `emp_leaves`(`emp_id`, `applies_date`, `leave_type`, `year`, `leaves_credit`, `from_date`, `to_date`, `no_of_days`, `leaves_surrender`, `description`, `status`) VALUES ('$empid','$present_date','$leaveid', NULL,NULL,'$fromdate','$todate','$noofleaves',NULL,NULL,0)");
-$leave_select = mysqli_query($connect, "SELECT * FROM emp_leaves WHERE emp_id = '$empid' AND leave_type = $leaveid AND `from_date` = '$fromdate' AND  `to_date` = '$todate' ");
+$leave_select = mysqli_query($connect, "SELECT emp_leaves.*,leaves.leave_type AS leave_name FROM emp_leaves,leaves WHERE emp_leaves.leave_type = leaves.s_no AND leaves.status = 1 AND emp_leaves.emp_id = '$empid' AND emp_leaves.leave_type = $leaveid AND emp_leaves.from_date = '$fromdate' AND  emp_leaves.to_date = '$todate' ");
+
 $leave_select_fetch = mysqli_fetch_assoc($leave_select);
-echo $leave_insert;
+$leave_insert;
 // if(isset($leave_insert)){
 //     echo "OK";
 //     mysqli_query($connect,"COMMIT");
@@ -36,7 +37,7 @@ echo $leave_insert;
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Type Of Leave</label>
                                     <div class="col-sm-4">
-                                        <input type="text" value="<?php //echo $leave_select_fetch['']?>"  class="form-control" disabled />
+                                        <input type="text" value="<?php echo $leave_select_fetch['leave_name']?>"  class="form-control" disabled />
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +53,7 @@ echo $leave_insert;
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Applied Leave Days</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" value="<?php //echo $leave_select_fetch['']?>" disabled />
+                                        <input type="text" class="form-control" value="<?php echo $leave_select_fetch['no_of_days']?>" disabled />
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +61,7 @@ echo $leave_insert;
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">From Date</label>
                                     <div class="col-sm-4">
-                                        <input type="text"  class="form-control" value="<?php //echo $leave_select_fetch['']?>" disabled />
+                                        <input type="text"  class="form-control" value="<?php echo $leave_select_fetch['from_date']?>" disabled />
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +69,7 @@ echo $leave_insert;
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">To Date</label>
                                     <div class="col-sm-4">
-                                        <input type="text"  class="form-control" value="<?php //echo $leave_select_fetch['']?>" disabled />
+                                        <input type="text"  class="form-control" value="<?php echo $leave_select_fetch['to_date']?>" disabled />
                                     </div>
                                 </div>
                             </div>

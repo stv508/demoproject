@@ -102,7 +102,7 @@ $get = $_GET['empid'];
                     },
                     success: function(data){
                         $('#la').val(data);
-                        alert(leaveid);
+                        // alert(leaveid);
                     }
                 })
             });

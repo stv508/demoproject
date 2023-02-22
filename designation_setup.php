@@ -1,6 +1,6 @@
 <?php 
 include("session.php");
-include("header.php")
+include("header.php");
 ?>
 <?php
 $select_desgination =mysqli_query($connect, "SELECT * FROM `emp_designations`");
@@ -20,7 +20,7 @@ $select_desgination =mysqli_query($connect, "SELECT * FROM `emp_designations`");
                                         <div class="card-body">
                                             <h4 class="">Available Designations</h4>
                                             <div class="col-sm-3" style="display: flex; justify-content: space-between; float: right; transform: translateY(-40px);">
-                                                <a href="set_holidays.php"><button type="button" class="btn btn-info btn-fw col-lg-12">Create Designations</button></a>
+                                                <a href="create_desig.php"><button type="button" class="btn btn-info btn-fw col-lg-12">Create Designations</button></a>
                                             </div><br><br>
                                             <div class="main-panel">
                                                 <div class="">
@@ -45,12 +45,37 @@ $select_desgination =mysqli_query($connect, "SELECT * FROM `emp_designations`");
                                                                                     echo "<tr>
                                                                                           <td>".$count."</td>
                                                                                           <td>".$select_desgination_fetch['designation_name']."</td>
-                                                                                          <td><center><i class='fa-regular text-info fa-pen-to-square' id=''></i></center></td>
-                                                                                          <td><center><i class='icon-trash text-danger'></center></td>
+                                                                                          <td><center><a href='edit_desig.php'><i class='fa-regular text-info fa-pen-to-square' id=''></i></a></center></td>
+                                                                                          <td><center><button type='button' class='btn btn-light' data-toggle='modal' data-target='#exampleModalCenter'>
+                                                                                          <i class='icon-trash text-danger'></i>
+                                                                                          </button></center></td>
+                                                                                          
+                                                                                          
                                                                                       </tr>";
                                                                                     $count = $count + 1;
                                                                                 }
                                                                                 ?>
+
+                                                                                <!-- Modal -->
+                                                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                                              <div class="modal-content">
+                                                                                                <div class="modal-header">
+                                                                                                  <h5 class="modal-title" id="exampleModalLongTitle">Are you Sure want to Delete</h5>
+                                                                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                  </button>
+                                                                                                </div>
+                                                                                                <div class="modal-body">
+                                                                                                  ...
+                                                                                                </div>
+                                                                                                <div class="modal-footer">
+                                                                                                  <button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button>
+                                                                                                  <button type="button" class="btn btn-secondary">Cancel</button>
+                                                                                                </div>
+                                                                                              </div>
+                                                                                            </div>
+                                                                                          </div>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
@@ -70,9 +95,9 @@ $select_desgination =mysqli_query($connect, "SELECT * FROM `emp_designations`");
             </div>
         </div>
 
-    <?php
-    include("footer.php");
-    ?>
+        <?php
+        include("footer.php");
+        ?>
     </div>
     
     <!-- 

@@ -11,8 +11,9 @@ $emp_list = mysqli_query($connect, "SELECT * FROM `emp_personal`,`emp_profession
                 <div class="card">
                     <div class="card-body">
                         <h2 class="">Employees Salary</h2>
-                        <div class="col-sm-4" style="display: flex; float: right; transform: translateY(-40px); ">                            
-                            <a href="add_salary.php"><button type="button" style="transform: translateX(450px);" class="btn btn-info btn-fw col-lg-12"> Add Salary </button></a>
+                        <div class="col-sm-4" style="display: flex; float: right; transform: translateY(-40px); ">
+                        <input type="text" class="form-control col-sm-7" id="exampleInputUsername2" placeholder="Search Employee">
+                            <a href="add_salary.php"><button type="button" style="transform: translateX(80px);" class="btn btn-info btn-fw col-lg-12"> Add Salary </button></a>
                         </div>
 
                         <p class="card-description"></p>

@@ -113,12 +113,8 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
                             <p class="mb-0 font-weight-normal float-left dropdown-header">Settings</p>
-                            <a class="dropdown-item preview-item">
-                                <i class="icon-head"></i> Profile
-                            </a>
-                            <a class="dropdown-item preview-item">
-                                <i class="icon-inbox"></i> Logout
-                            </a>
+                            <a class="dropdown-item preview-item" href="profile.php"><i class="icon-head"></i> Profile</a>
+                            <a class="dropdown-item preview-item" href="logout.php"><i class="icon-inbox"></i> Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -143,11 +139,24 @@
                     </div>
                 </div>
                 <ul class="nav">
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="home.php">
                             <i class="icon-box menu-icon"></i>
                             <span class="menu-title">Dashboard</span>
                         </a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="icon-box menu-icon"></i>
+                            <span class="menu-title">DashBoard</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="ui-basic">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="home.php">HR DashBoard</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="emp_home.php">Employee DashBoard</a></li>
+                            </ul>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="employees.php">
