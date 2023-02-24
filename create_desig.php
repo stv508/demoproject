@@ -1,7 +1,6 @@
 <?php
 include("session.php");
 include("header.php");
-
 ?>
 
 <div class="main-panel">
@@ -18,7 +17,7 @@ include("header.php");
                                 <div class="form-group row">
                                     <label class="col-sm-3 col-form-label">Designation</label>
                                     <div class="col-sm-4">
-                                        <input type="text" class="form-control" name="reason" placeholder="Add Designation" required />
+                                        <input type="text"  class="form-control" name="desg_name" placeholder="Add Designation" required />
                                     </div>
                                 </div>
                             </div>
@@ -28,7 +27,6 @@ include("header.php");
                             </center>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>

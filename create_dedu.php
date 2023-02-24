@@ -1,4 +1,4 @@
-<?php 
+<?php
 include("session.php");
 include("header.php");
 $dedu_select = mysqli_query($connect, "SELECT * FROM `deduction` WHERE `status` = 1 ");
@@ -33,14 +33,14 @@ $dedu_select = mysqli_query($connect, "SELECT * FROM `deduction` WHERE `status` 
                                                         <td style="width: 50px;"><b>S.No</b></td>
                                                         <td><b>Name Of Deduction</b></td>
                                                     </tr>
-                                                    <?php 
+                                                    <?php
                                                     $count = 1;
-                                                    while($dedu_select_fetch = mysqli_fetch_assoc($dedu_select)){
+                                                    while ($dedu_select_fetch = mysqli_fetch_assoc($dedu_select)) {
                                                         echo "<tr>
-                                                        <td>".$count."</td>
-                                                        <td>".$dedu_select_fetch['deduction_name']."</td>
+                                                        <td>" . $count . "</td>
+                                                        <td>" . $dedu_select_fetch['deduction_name'] . "</td>
                                                     </tr>";
-                                                    $count++;
+                                                        $count++;
                                                     }
                                                     ?>
                                                 </tbody>
@@ -50,12 +50,12 @@ $dedu_select = mysqli_query($connect, "SELECT * FROM `deduction` WHERE `status` 
                                 </div>
                             </div>
                         </div>
-                    <br>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <?php
 include("footer.php");
 ?>
+</div>

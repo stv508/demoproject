@@ -2,7 +2,7 @@
 include("session.php");
 include("header.php");
 include("accept_reject.php");
-$leave_app = mysqli_query($connect, "SELECT emp_leaves.s_no,emp_leaves.emp_id,emp_personal.emp_name,leaves.leave_type,emp_leaves.from_date,emp_leaves.to_date, DATEDIFF(to_date,from_date)+1 As days,emp_leaves.status FROM `emp_leaves`,`emp_personal`,`leaves` WHERE emp_personal.emp_id = emp_leaves.emp_id AND emp_leaves.leave_type=leaves.s_no AND leaves.status=1 AND emp_leaves.no_of_days IS NOT NULL; ");
+$leave_app = mysqli_query($connect, "SELECT emp_leaves.s_no,emp_leaves.emp_id,emp_personal.emp_name,leaves.leave_type,emp_leaves.from_date,emp_leaves.to_date, DATEDIFF(to_date,from_date)+1 As days,emp_leaves.status FROM `emp_leaves`,`emp_personal`,`leaves` WHERE emp_personal.emp_id = emp_leaves.emp_id AND emp_leaves.leave_type=leaves.s_no AND leaves.status=1 AND emp_leaves.no_of_days IS NOT NULL  AND emp_leaves.from_date > CURRENT_DATE() ");
 
 ?>
 <div class="main-panel">
@@ -66,12 +66,6 @@ $leave_app = mysqli_query($connect, "SELECT emp_leaves.s_no,emp_leaves.emp_id,em
                               else if($leave_app_fetch['status'] == 0){
                                 echo "<td><center>  <button type='button' class='btn btn-warning'>Pending</button></center></td>";
                               }
-                            //   else {
-                            //     echo " <td><center> <button type='button' class='btn btn-danger'>Rejected</button></center></td>";
-                            //   }
-                              
-                               
-                            
                            echo " </tr>";                            
                             AcceptAndReject(($count-1),$leave_app_fetch['s_no']);
                       $count = $count + 1;

@@ -18,12 +18,11 @@ $presentdate = date("Y-m-d");
 
 $month_cal = mysqli_query($connect, "SELECT `emp_id`,MONTH(`from_date`) AS `date`  FROM `emp_leaves` WHERE emp_id = '$get' AND from_date = '$presentdate' ");
 $mon_fetch = mysqli_fetch_assoc($month_cal);
-if(isset($mon_fetch['date'])){
+if (isset($mon_fetch['date'])) {
     $mon_fetch['date'];
-}
-else{
+} else {
     // SELECT emp_id, month, sum(leaves) AS fleave,tleaves, tmonth,leaves.* FROM 
-	// (SELECT from_date,to_date,emp_id,leave_type,MONTH(to_date) AS tmonth, MONTH(from_date) AS month, 
+    // (SELECT from_date,to_date,emp_id,leave_type,MONTH(to_date) AS tmonth, MONTH(from_date) AS month, 
     //  CASE 
     //  	WHEN MONTH(to_date)!= MONTH(from_date) THEN DATEDIFF(LAST_DAY(from_date) , from_date) +1 
     //  	ELSE DATEDIFF(to_date,from_date) + 1 
@@ -32,7 +31,7 @@ else{
     //  	WHEN MONTH(to_date) != MONTH(from_date) THEN DAYOFMONTH(to_date)     
     //  END as tleaves
     //  FROM emp_leaves     
- 	// ) AS a     JOIN leaves ON a.emp_id = 'emp3'  AND ( MONTH(a.from_date) = '2' OR MONTH(a.to_date) = '2')  AND ( YEAR(a.from_date) = '2022' OR YEAR(a.to_date) = '2022') AND leaves.status = 1 AND leaves.s_no = a.leave_type
+    // ) AS a     JOIN leaves ON a.emp_id = 'emp3'  AND ( MONTH(a.from_date) = '2' OR MONTH(a.to_date) = '2')  AND ( YEAR(a.from_date) = '2022' OR YEAR(a.to_date) = '2022') AND leaves.status = 1 AND leaves.s_no = a.leave_type
     // 	GROUP BY month
     //     ORDER BY month;
 
@@ -125,6 +124,100 @@ echo $leave_1_fetch['tot_lev'];
                                                 </thead>
                                                 <tbody id="holidays">
                                                     <?php
+                                                    // $count = 1;
+                                                    // while ($qu_fetch = mysqli_fetch_assoc($holidays)) {
+                                                    //     echo "<tr>
+                                                    //             <td>" . $count . "</td>
+                                                    //             <td>" . $qu_fetch['date'] . "</td>
+                                                    //             <td>" . $qu_fetch['reason'] . "</td>
+                                                    //         </tr>";
+                                                    //     $count = $count + 1;
+                                                    // }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ============================ -->
+                        <br><br>
+                        <br><br>
+
+                        <div class="table-responsive">
+                            <div class="col-lg-12 stretch-card">
+                                <div class="card">
+                                    <div class="row">
+                                    <div class="card-body  col-lg-6">
+                                        <h4 class="card-title">Leaves Details</h4>
+                                        <div class="col-sm-0" style="display: flex; justify-content: space-between; float: right; transform: translateY(-30px);">
+                                            <a href="apply_leave.php?empid=<?php echo $get; ?>"><button type="button" class="btn btn-info btn-fw col-lg-12">Apply Leave</button></a>
+                                        </div>
+                                        <div class="table-responsive pt-3 ">
+                                            <table class="table table-bordered">
+
+                                                <thead>
+                                                    <tr>
+                                                        <th>S.No</th>
+                                                        <th>Type Of Leaves</th>
+                                                        <th>Total Leaves Available</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $count = 1;
+                                                    while ($lea_fetch = mysqli_fetch_assoc($leave_sele)) {
+
+                                                        $leaveID = $lea_fetch['s_no'];
+                                                        $leave_1 = mysqli_query($connect, "SELECT leave_type,SUM(curr_m_leaves) AS curr_m_leaves FROM (SELECT leaves_credit,leaves_surrender,leave_type,from_date,to_date,status,CASE 
+                                                    WHEN (LEFT(from_date,7) = LEFT(CURRENT_DATE(),7) AND LEFT(to_date,7) = LEFT(CURRENT_DATE(),7) )
+                                                        THEN DATEDIFF(to_date,from_date)+1
+                                                    WHEN LEFT(from_date,7) < LEFT(CURRENT_DATE(),7)
+                                                        THEN DAYOFMONTH(to_date)
+                                                    ELSE DATEDIFF(LAST_DAY(from_date),from_date)+1
+                                                    END AS curr_m_leaves FROM emp_leaves WHERE emp_id = '$get' AND leave_type = $leaveID AND `status` = 1 AND ( LEFT(from_date,7) = LEFT(CURRENT_DATE(),7) OR LEFT(to_date,7) = LEFT(CURRENT_DATE(),7))) AS a
+                                                    GROUP BY curr_m_leaves;");
+                                                        $yearly = mysqli_query($connect, "SELECT * FROM (SELECT SUM(curr_y_leaves) AS curr_y_leaves  FROM (SELECT leaves_credit,leaves_surrender,leave_type,from_date,to_date,status,CASE 
+                                                    WHEN (LEFT(from_date,4) = LEFT(CURRENT_DATE(),4) AND LEFT(to_date,4) = LEFT(CURRENT_DATE(),4) )
+                                                        THEN DATEDIFF(to_date,from_date)+1
+                                                    WHEN LEFT(from_date,4) < LEFT(CURRENT_DATE(),4)
+                                                        THEN DAYOFMONTH(to_date)
+                                                    ELSE DATEDIFF(LAST_DAY(from_date),from_date)+1
+                                                    END AS curr_y_leaves FROM emp_leaves WHERE emp_id = '$get' AND leave_type = $leaveID AND `status` = 1 AND ( LEFT(from_date,4) = LEFT(CURRENT_DATE(),4) OR LEFT(to_date,4) = LEFT(CURRENT_DATE(),4))) AS a) AS b
+                                                GROUP BY b.curr_y_leaves");
+                                                        $yearly_fetch = mysqli_fetch_assoc($yearly);
+                                                        $leave_1_fetch = mysqli_fetch_assoc($leave_1);
+                                                        echo "<tr>";
+                                                        echo        "<td>" . $count . "</td>"; // "-" . $lea_fetch['s_no'] . 
+                                                        echo        "<td><a href='leave_details.php?id=".$leaveID."&empid=".$emp_panal_fetch['emp_id']."'>".$lea_fetch['leave_type']."</a></td>";
+                                                                    
+                                                        echo        "<td>" . $lea_fetch['max_in_year'] - $yearly_fetch['curr_y_leaves'] . "</td>";
+                                                        $count++;
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                            <!--  -->
+                                            <!-- $lea_fetch['leave_type'] -->
+                                            <!-- "<td>" . $lea_fetch['leave_type'] . "</td>"; -->
+                                        </div>
+                                    </div>
+                                    <div class="card-body col-lg-6">
+                                        <br>
+                                        <h4 class="card-title">Holiday Details</h4>
+                                        <br><br>
+                                        <div class="table-responsive pt-3">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S.No</th>
+                                                        <th>Date</th>
+                                                        <th>Reason</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="holidays">
+                                                    <?php
                                                     $count = 1;
                                                     while ($qu_fetch = mysqli_fetch_assoc($holidays)) {
                                                         echo "<tr>
@@ -139,61 +232,10 @@ echo $leave_1_fetch['tot_lev'];
                                             </table>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- ============================ -->
-                        <br><br>
-                        <br><br>
-                        <div class="table-responsive">
-                            <div class="col-lg-12 stretch-card">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Leaves Details</h4>
-                                        <div class="col-sm-0" style="display: flex; justify-content: space-between; float: right; transform: translateY(-30px);">
-                                                <a href="apply_leave.php?empid=<?php echo $get; ?>"><button type="button" class="btn btn-info btn-fw col-lg-12">Apply Leave</button></a>
-                                            </div>
-                                        <div class="table-responsive pt-3">
-                                            <table class="table table-bordered">
-
-                                                <thead>
-                                                    <tr>
-                                                        <th>S.No</th>
-                                                        <th>Type Of Leaves</th>
-                                                        <th>Maximum Leaves Per Year</th>
-                                                        <th>Maximum Leaves Per Month</th>
-                                                        <!-- <th>Leave Status</th> -->
-                                                        <th>Total Leaves In This Month</th>
-                                                        <th>Total Leaves Available</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
-                                                    $count = 1;
-                                                    
-                                                    while ($lea_fetch = mysqli_fetch_assoc($leave_sele)) {
-                                                        $leaveID = $lea_fetch['s_no'];
-                                                        $leave_1 = mysqli_query($connect, "SELECT emp_id, `month`, SUM(leaves) AS tot_lev, a.leave_type , leaves.* ,MIN(leaves_credit) AS leaves_credit    FROM (SELECT from_date,to_date,emp_id,leaves_credit,leave_type, CASE  WHEN LEFT(from_date,7) != LEFT(CURRENT_DATE(),7) THEN LEFT(to_date,7) ELSE LEFT(from_date,7)  END  AS `month`, CASE WHEN left(to_date,7)!= left(CURRENT_DATE(),7)  THEN DATEDIFF(LAST_DAY(from_date) , from_date) +1 WHEN left(from_date,7)!= LEFT(CURRENT_DATE(),7) THEN  DAYOFMONTH(to_date) ELSE DATEDIFF(to_date,from_date) + 1 END AS leaves FROM emp_leaves ) AS a INNER JOIN leaves ON  leaves.s_no = a.leave_type  AND  a.emp_id = '$get' AND LEFT(CURRENT_DATE(),7) = a.month AND a.leave_type = '$leaveID' ");
-                                                        $leave_1_fetch = mysqli_fetch_assoc($leave_1);
-                                                        echo "<tr>";
-                                                        echo        "<td>" . $count . "-" . $lea_fetch['s_no'] . "</td>";
-                                                        echo        "<td>" . $lea_fetch['leave_type'] . "</td>";
-                                                        echo        "<td>" . $lea_fetch['max_in_year'] . "</td>";
-                                                        echo        "<td>" . $lea_fetch['max_in_month'] . "</td>";
-                                                        echo        "<td>".$leave_1_fetch['tot_lev'] ."</td>";
-                                                        echo        "<td>".$leave_1_fetch['leaves_credit']."</td>";
-                                                        echo    "</tr>";
-                                                            // echo $leave_1_fetch['tot_lev'];
-                                                        $count++;
-                                                    }
-                                                    ?>
-                                                </tbody>
-                                            </table>
-
-                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <center>
@@ -205,4 +247,7 @@ echo $leave_1_fetch['tot_lev'];
             </div>
         </div>
     </div>
+    <?php
+    include("footer.php");
+    ?>
 </div>

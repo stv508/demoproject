@@ -1,29 +1,14 @@
 <?php
 include("session.php");
 include("header.php");
-if($_SERVER["REQUEST METHOD"] == "POST"){
-$todate = $_POST['todate'];
-$fromdate  = $_POST['fromdate'];
-$leaveid = $_POST['leaveid'];
-$empid = $_POST['empid'];
-$noofleaves = $_POST['datediff'];
-$present_date = date("Y-m-d");
-// mysqli_query($connect,"START TRANSACTION");
-$leave_insert = mysqli_query($connect, "INSERT INTO `emp_leaves`( `emp_id`, `applies_date`, `leave_type`, `from_date`, `to_date`, `no_of_days`,  `status`) VALUES ('$empid','$present_date', $leaveid,'$fromdate','$todate', $noofleaves , 0 )");
-// mysqli_query($connect,"INSERT INTO `emp_leaves`(`emp_id`, `applies_date`, `leave_type`, `year`, `leaves_credit`, `from_date`, `to_date`, `no_of_days`, `leaves_surrender`, `description`, `status`) VALUES ('$empid','$present_date','$leaveid', NULL,NULL,'$fromdate','$todate','$noofleaves',NULL,NULL,0)");
-$leave_select = mysqli_query($connect, "SELECT emp_leaves.*,leaves.leave_type AS leave_name FROM emp_leaves,leaves WHERE emp_leaves.leave_type = leaves.s_no AND leaves.status = 1 AND emp_leaves.emp_id = '$empid' AND emp_leaves.leave_type = $leaveid AND emp_leaves.from_date = '$fromdate' AND  emp_leaves.to_date = '$todate' ");
-$leave_select_fetch = mysqli_fetch_assoc($leave_select);
-$leave_insert;
-}
-// if(isset($leave_insert)){
-//     echo "OK";
-//     mysqli_query($connect,"COMMIT");
-// }else{
-//     echo "error";
-//     mysqli_query($connect,"ROLLBACK");
-// }
-?>
 
+echo "<br>".$todate = $_POST['todate'];
+echo "<br>".$fromdate  = $_POST['fromdate'];
+echo "<br>".$leaveid = $_POST['leaveid'];
+echo "<br>".$empid = $_POST['empid'];
+echo "<br>".$noofleaves = $_POST['datediff'];
+echo "<br>".$present_date = date("Y-m-d");
+?>
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">

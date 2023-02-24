@@ -37,6 +37,18 @@ include("header.php");
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-10">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">Carry Forword</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control" name="carry" required>
+                                            <option></option>
+                                            <option value="1">No</option>
+                                            <option value="2">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <center>
                                 <button style="margin-right: 30px ;" type="submit" class="btn btn-success">Submit</button>
                                 <a href="leaves.php"><button type="button" class="btn btn-danger">Cancel</button></a>

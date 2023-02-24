@@ -139,17 +139,9 @@
                     </div>
                 </div>
                 <ul class="nav">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="home.php">
-                            <i class="icon-box menu-icon"></i>
-                            <span class="menu-title">Dashboard</span>
-                        </a>
-                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                            <i class="icon-box menu-icon"></i>
-                            <span class="menu-title">DashBoard</span>
-                            <i class="menu-arrow"></i>
+                            <i class="icon-box menu-icon"></i><span class="menu-title">DashBoard</span><i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
@@ -158,6 +150,17 @@
                             </ul>
                         </div>
                     </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="icon-disc menu-icon"></i><span class="menu-title">DashBoard</span><i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="ui-basic">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="home.php">HR DashBoard</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="emp_home.php">Employee DashBoard</a></li>
+                            </ul>
+                        </div>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="employees.php">
                             <i class="menu-icon icon-head"></i>
@@ -189,6 +192,17 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                            <i class="icon-head menu-icon"></i><span class="menu-title">Salary</span><i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="auth">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="create_earn.php">Create Earnings</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="create_dedu.php">Create Deductions</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                             <i class="icon-disc menu-icon"></i>
                             <span class="menu-title">Salary</span>
@@ -200,7 +214,7 @@
                                 <li class="nav-item"> <a class="nav-link" href="create_dedu.php">Create Deductions</a></li>
                             </ul>
                         </div>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="salary.php">
                             <i class="fa menu-icon fa-person-walking-arrow-right"></i>

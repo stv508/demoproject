@@ -1,7 +1,7 @@
 <?php
 include("session.php");
 include("header.php");
-$leave_sele = mysqli_query($connect, "SELECT * FROM `leaves` WHERE `status` = 1 ");
+$leave_sele = mysqli_query($connect, "SELECT * FROM `leaves` WHERE `status` > 0 ");
 ?>
 <div class="main-panel">
     <div class="content-wrapper">
@@ -33,20 +33,28 @@ $leave_sele = mysqli_query($connect, "SELECT * FROM `leaves` WHERE `status` = 1 
                                                                                 <th>Type Of Leaves</th>
                                                                                 <th>Maximum Leaves Per Year</th>
                                                                                 <th>Maximum Leaves Per Month</th>
+                                                                                <th>Carry Forword</th>
                                                                                 <th></th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
                                                                             <?php
                                                                             $count = 1;
+                                                                            function CarryFor($status){
+                                                                                if($status == 1){
+                                                                                    echo "<td>No</td>";
+                                                                                }
+                                                                                elseif($status == 2){
+                                                                                    echo "<td>Yes</td>";                                                                                }
+                                                                            }
                                                                             while ($lea_fetch = mysqli_fetch_assoc($leave_sele)) {
                                                                                 echo "<tr>
                                                                                 <td>" . $count . "</td>
                                                                                 <td>" . $lea_fetch['leave_type'] . "</td>
                                                                                 <td>" . $lea_fetch['max_in_year'] . "</td>
-                                                                                <td>" . $lea_fetch['max_in_month'] . "</td>
-                                                                                
-                                                                                <td><center><a href='set_leaves_edit.php?leaveid=" . $lea_fetch['s_no'] . "'><i class='icon-trash text-danger'></i></a></center></td>
+                                                                                <td>" . $lea_fetch['max_in_month'] . "</td>";
+                                                                                CarryFor($lea_fetch['status']);
+                                                                                echo "<td><center><a href='set_leaves_edit.php?leaveid=" . $lea_fetch['s_no'] . "'><i class='icon-trash text-danger'></i></a></center></td>
                                                                             </tr>";
                                                                                 $count++;
                                                                             }
