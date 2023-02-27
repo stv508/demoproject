@@ -10,7 +10,7 @@ $get = $_GET['empid'];
         <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" id="form-div">
                         <h2 class="">Apply For Leave</h2>
                         <br><br>
                         <!-- action="leave_query.php?empid=<?php //echo $get 
@@ -68,10 +68,6 @@ $get = $_GET['empid'];
     </div>
     <?php
     include("footer.php");
-    //   $from = Document.getElementById('fromdate');
-    //   $to =Document.getElementById('todate');
-    //   $diff =Date_diff($to,$from);
-    //   echo $diff;
     ?>
     <script>
         $(document).ready(function() {
@@ -88,24 +84,25 @@ $get = $_GET['empid'];
                     success: function(data) {
                         let leave = data.split("*")
                         $('#la').val(leave[0]);
-
                         // alert(leaveid);
                     }
                 })
             });
+            var check_leave = 0;
             $('#apply').click(function() {
                 var fromdate = $('#fromdate').val();
                 var todate = $('#todate').val();
                 var leaveid = $('#leaveid').val();
+                
                 if ((fromdate) && (todate) && (leaveid)) {
                     var date1 = new Date(fromdate);
                     var date2 = new Date(todate);
                     var Difference_In_Time = date2.getTime() - date1.getTime();
                     var Difference_In_Days = (Difference_In_Time / (1000 * 3600 * 24)) + 1;
                     if (Difference_In_Days > 0) {
-                        console.log("Total " + " is: " + Difference_In_Days);
+                        // console.log("Total is: " + Difference_In_Days);
                         $.ajax({
-                            url: "leave_query.php",
+                            url: "leave_already.php",
                             method: "POST",
                             data: {
                                 fromdate: fromdate,
@@ -114,9 +111,27 @@ $get = $_GET['empid'];
                                 empid: empi,
                                 leaveid: leaveid
                             },
-                            // success: function() {
-                                // location.replace("apply_leave_succ.php");
-                            // }
+                            success: function(data1) {
+                                if(data1 == 0){
+                                    $.ajax({
+                                        url: "leave_query.php",
+                                        method: "POST",
+                                        data: {
+                                            fromdate: fromdate,
+                                            todate: todate,
+                                            datediff: Difference_In_Days,
+                                            empid: empi,
+                                            leaveid: leaveid
+                                        },
+                                        success: function(data) {
+                                            $('#form-div').html(data);
+                                        }
+                                    });
+                                }
+                                else{
+                                    alert("You Already Have Leave On That Dates");
+                                }
+                            }
                         });
                     } else {
                         alert("Todate Must Be Greater Than Fromdate");

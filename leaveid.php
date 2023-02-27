@@ -10,7 +10,6 @@ echo "*";
 $leavetype = mysqli_query($connect,"SELECT * FROM leaves WHERE s_no = '$leaveid'");
 $leave = mysqli_fetch_assoc($leavetype);
 echo $leavecarry = $leave['status'];
-
 ?>
 
 

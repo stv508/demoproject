@@ -3,7 +3,8 @@ include("session.php");
 include("header.php");
 ?>
 <?php
-$select_desgination = mysqli_query($connect, "SELECT * FROM `emp_designations`");
+$select_desgination = mysqli_query($connect, "SELECT emp_designations.*,emp_professional.emp_designation FROM (SELECT * FROM emp_designations WHERE `status` = 1) AS emp_designations LEFT JOIN emp_professional ON emp_designations.designation_id = emp_professional.emp_designation ");
+
 ?>
 
 
@@ -32,9 +33,7 @@ $select_desgination = mysqli_query($connect, "SELECT * FROM `emp_designations`")
                                                     <tr>
                                                         <th style="width: 200px;">S.No</th>
                                                         <th>Designation</th>
-                                                        <th style="width: 100px;">
-                                                            <center>Edit</center>
-                                                        </th>
+                                                    
                                                         <th style="width: 100px;">
                                                             <center>Delete</center>
                                                         </th>
@@ -44,12 +43,18 @@ $select_desgination = mysqli_query($connect, "SELECT * FROM `emp_designations`")
                                                     <?php
                                                     $count = 1;
                                                     while ($select_desgination_fetch = mysqli_fetch_assoc($select_desgination)) {
-                                                        echo "<tr>
-                                                                <td>" . $count . "</td>
-                                                                <td>" . $select_desgination_fetch['designation_name'] . "</td>
-                                                                <td><center><a href='edit_desig.php'><i class='fa-regular text-info fa-pen-to-square' id=''></i></a></center></td>
-                                                                <td><center><button type='button' class='btn btn-light' data-toggle='modal' data-target='#exampleModalCenter'><i class='icon-trash text-danger'></i></button></center></td>
-                                                            </tr>";
+                                                        $disabled = "enabled";
+                                                        echo "<tr>";
+                                                        echo        "<td>" . $count . "</td>";
+                                                        echo        "<td class='desgname' id='desg".$select_desgination_fetch['designation_id']."'>" . $select_desgination_fetch['designation_name'] . "</td>";
+                                                        if($select_desgination_fetch['emp_designation'] != null){
+                                                            $disabled = "disabled";
+                                                        }
+                                                        echo        "<td><center><button ".$disabled." type='button' value='".$select_desgination_fetch['designation_id']."'     id='eld' class='btn btn-light' data-toggle='modal' data-target='#exampleModalCenter'><i class='icon-trash text-danger'></i></button></center></td>";
+                                                        echo   "</tr>";
+
+                                                  
+                
                                                         $count = $count + 1;
                                                     }
                                                     ?>
@@ -66,10 +71,10 @@ $select_desgination = mysqli_query($connect, "SELECT * FROM `emp_designations`")
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        
+                                                        <p id="msg"></p>                                                        
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" id="delete" class="btn btn-danger">Delete</button>
+                                                        <button type="button"  id="delete1" class="btn btn-danger">Delete</button>
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                     </div>
                                                 </div>
@@ -86,12 +91,45 @@ $select_desgination = mysqli_query($connect, "SELECT * FROM `emp_designations`")
     </div>
 
     <?php
-    include("footer.php");
+        include("footer.php");
     ?>
 </div>
 
 <script>
-    $('#delete').click(function() {
-        
+
+    $("[id^=eld]").click(function(){
+        var a = $(this).val();
+        var b = $(this).closest('td').prev().text();
+        $.ajax({
+            url: "isIdUsed.php",
+            method: "POST",
+            data: {
+                desgid: a
+            },
+            success : function(data){
+                if(data > 0){
+                    $('#delete1').prop('disabled', true);
+                    $('#msg').text("This Designation Already In Use");
+                }
+                else{
+                    $('#delete1').prop('disabled', false);
+                    $('#msg').text(b);
+                    $('#delete1').val(a);
+                }
+            }
+        });
+    });
+    $('#delete1').click(function(){
+        var c = $('#delete1').val();
+        $.ajax({
+            url: "delete_desg.php",
+            method: "POST",
+            data: {
+                desgid : c
+            },
+            success : function(){
+                location.reload(true);
+            }
+        });
     });
 </script>

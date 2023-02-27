@@ -2,7 +2,7 @@
 include("session.php");
 include("header.php");
 $earning = $_POST['earning'];
-$earn_insert = mysqli_query($connect, "INSERT INTO `earnings`( `earning_name`, `status`) VALUES ('$earning',1)");
+$earn_insert = mysqli_query($connect, "INSERT INTO `earnings`( `earning_name`,`payroll_type`, `status`) VALUES ('$earning','e',1)");
 $earn_select = mysqli_query($connect, "SELECT * FROM `earnings` WHERE earning_name = '$earning' AND `status` = 1 ");
 $earn_select_fetch = mysqli_fetch_assoc($earn_select);
 ?>
@@ -30,13 +30,10 @@ $earn_select_fetch = mysqli_fetch_assoc($earn_select);
                                                     <div class="col-sm-8">
                                                         <input type="text" class="form-control" value="<?php echo $earn_select_fetch['earning_name'];?>" disabled/>
                                                     </div>
-                                                    <!-- <div class="col-sm-2"> -->
-
-                                                    <!-- </div><i class="icon-circle-plus icon-md " style="background-color: lightgray;border-radius: 10px; height: 50px;padding: 12px 12px;"></i> -->
                                                 </div>
                                             </div>
                                             <center>
-                                                <a href="create_earn.php"><button type="button" class="btn btn-info">Back</button></a>
+                                                <a href="payroll_items.php"><button type="button" class="btn btn-info">Back</button></a>
                                             </center>
                                         </form>
                                     </div>

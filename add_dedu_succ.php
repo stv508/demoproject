@@ -2,7 +2,7 @@
 include("session.php");
 include("header.php");
 echo $deduction = $_POST['deduction'];
-$dedu_insert = mysqli_query($connect, "INSERT INTO `deduction`( `deduction_name`, `status`) VALUES ('$deduction',1)");
+$dedu_insert = mysqli_query($connect, "INSERT INTO `deduction`( `deduction_name`,`payroll_type`, `status`) VALUES ('$deduction','d',1)");
 $dedu_select = mysqli_query($connect, "SELECT * FROM `deduction` WHERE deduction_name = '$deduction' AND `status` = 1 ");
 $dedu_select_fetch = mysqli_fetch_assoc($dedu_select);
 ?>
@@ -36,7 +36,7 @@ $dedu_select_fetch = mysqli_fetch_assoc($dedu_select);
                                                 </div>
                                             </div>
                                             <center>
-                                                <a href="create_dedu.php"><button type="button" class="btn btn-info">Back</button></a>
+                                                <a href="payroll_items.php"><button type="button" class="btn btn-info">Back</button></a>
                                             </center>
                                         </form>
                                     </div>

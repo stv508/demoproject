@@ -1,0 +1,19 @@
+// $("[id^=eld]").click(function(){
+//         // row = $(this).closest('td').parent()[0].sectionRowIndex;
+//         var idval = $(this).attr('id');
+//         idval = idval.substr(3,1);
+//         alert(idval);
+//         var reqid = $('#desg'+idval).text();
+//         // alert(reqid);
+//         $('#msg').text(reqid);
+//         $('#msg1').text(idval);
+//     });
+//     $('#delete1').click(function(){
+//         // alert($('#msg1').text());
+//         var msg = $('#msg1').text();
+//         alert(msg);
+//     });
+
+
+// GAM145 sep-nov
+// GAM146 sep-nov

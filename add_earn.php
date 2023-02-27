@@ -33,7 +33,7 @@ include("header.php");
                                             </div>
                                             <center>
                                                 <button style="margin-right: 30px ;" type="submit" class="btn btn-success">Create</button>
-                                                <a href="create_earn.php"><button type="button" class="btn btn-danger">Cancel</button></a>
+                                                <a href="payroll_items.php"><button type="button" class="btn btn-danger">Cancel</button></a>
                                             </center>
                                         </form>
                                     </div>
