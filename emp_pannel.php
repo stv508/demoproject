@@ -108,14 +108,18 @@ echo $leave_1_fetch['tot_lev'];
                             <div class="col-lg-12 stretch-card">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title">Holiday Details</h4>
+                                        <h4 class="card-title">Salary Details</h4>
+                                        <div class="col-sm-0" style="display: flex; float: right; transform: translateY(-40px);">
+                                            <a href="set_salary.php?empid=<?php echo $_GET['empid']; ?>"><button type="button" class="btn btn-info btn-fw col-lg-12">Set Salary</button></a>
+                                        </div>
                                         <div class="table-responsive pt-3">
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th>S.No</th>
-                                                        <th>Date</th>
-                                                        <th>Reason</th>
+                                                        <!-- <th>S.No</th> -->
+                                                        <th>Gross : 10000</th>
+                                                        <th>Net Salary : 10000</th>
+                                                        <th>PF : 10000</th>
                                                         <!-- <th>
                                                             <center>Edit</center>
                                                         </th> -->

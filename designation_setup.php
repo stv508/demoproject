@@ -3,7 +3,7 @@ include("session.php");
 include("header.php");
 ?>
 <?php
-$select_desgination = mysqli_query($connect, "SELECT emp_designations.*,emp_professional.emp_designation FROM (SELECT * FROM emp_designations WHERE `status` = 1) AS emp_designations LEFT JOIN emp_professional ON emp_designations.designation_id = emp_professional.emp_designation ");
+$select_desgination = mysqli_query($connect, "SELECT * FROM (SELECT emp_designations.*,emp_professional.emp_id FROM `emp_designations` LEFT JOIN `emp_professional`  ON emp_designations.designation_id = emp_professional.emp_designation GROUP BY emp_designations.designation_id) AS a WHERE `status` = 1 ");
 
 ?>
 
@@ -47,7 +47,7 @@ $select_desgination = mysqli_query($connect, "SELECT emp_designations.*,emp_prof
                                                         echo "<tr>";
                                                         echo        "<td>" . $count . "</td>";
                                                         echo        "<td class='desgname' id='desg".$select_desgination_fetch['designation_id']."'>" . $select_desgination_fetch['designation_name'] . "</td>";
-                                                        if($select_desgination_fetch['emp_designation'] != null){
+                                                        if($select_desgination_fetch['emp_id'] != null){
                                                             $disabled = "disabled";
                                                         }
                                                         echo        "<td><center><button ".$disabled." type='button' value='".$select_desgination_fetch['designation_id']."'     id='eld' class='btn btn-light' data-toggle='modal' data-target='#exampleModalCenter'><i class='icon-trash text-danger'></i></button></center></td>";
@@ -96,28 +96,11 @@ $select_desgination = mysqli_query($connect, "SELECT emp_designations.*,emp_prof
 </div>
 
 <script>
-
     $("[id^=eld]").click(function(){
         var a = $(this).val();
+        $('#delete1').val(a);
         var b = $(this).closest('td').prev().text();
-        $.ajax({
-            url: "isIdUsed.php",
-            method: "POST",
-            data: {
-                desgid: a
-            },
-            success : function(data){
-                if(data > 0){
-                    $('#delete1').prop('disabled', true);
-                    $('#msg').text("This Designation Already In Use");
-                }
-                else{
-                    $('#delete1').prop('disabled', false);
-                    $('#msg').text(b);
-                    $('#delete1').val(a);
-                }
-            }
-        });
+        $('#msg').text(b);
     });
     $('#delete1').click(function(){
         var c = $('#delete1').val();
