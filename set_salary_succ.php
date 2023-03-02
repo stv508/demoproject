@@ -1,7 +1,18 @@
 <?php
 include("session.php");
 include("header.php");
+$basic_pay = $_POST['basic_pay'];
 $get = $_GET['empid'];
+$joining_info = mysqli_query($connect, "SELECT emp_doj FROM emp_personal WHERE emp_id = '$get' AND `emp_status` = 1 ");
+$joining_info_fetch = mysqli_fetch_assoc($joining_info);
+$joining_date = $joining_info_fetch['emp_doj'];
+$salary  = mysqli_query($connect, "INSERT INTO `salary`(`emp_id`, `payroll_id`, `from_date`, `amount`, `status`) VALUES ('$get',1,'$joining_date','$basic_pay',1 )");
+$select_salary = mysqli_query($connect, "SELECT amount FROM `salary` WHERE `emp_id` = '$get' AND `payroll_id` = 1 AND `from_date` = '$joining_date' AND `amount` = '$basic_pay' AND `status`  = 1");
+$select_salary_fetch = mysqli_fetch_assoc($select_salary);
+
+if(!isset($salary)){
+    header("location: set_salary.php");
+}
 ?>
 
 <div class="main-panel">
@@ -10,33 +21,22 @@ $get = $_GET['empid'];
             <div class="col-lg-8 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="">Set Salary</h2>
+                        <h2 class="">Set Salary Successfull</h2>
                         <hr>
                         <br><br>
-                        <form class="form-sample" action="set_salary_succ.php?empid=<?php echo $get; ?>" method="post">
+                        <form class="form-sample">
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Basic Pay Per Year</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="pay" placeholder="Enter Employee Basic Pay" name="basic_pay" required />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <div class="form-group row">
-                                        <label class="col-sm-3 col-form-label">Basic Pay Per Month</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" id="basic" class="form-control" disabled />
+                                            <input type="text" class="form-control" value="<?php echo $select_salary_fetch['amount'];?>" disabled />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <center>
-                                <button style="margin-right: 30px ;" type="submit" class="btn btn-success">Submit</button>
-                                <a href="emp_pannel.php?empid=<?php echo $get; ?>"><button type="button" class="btn btn-danger">Cancel</button></a>
+                                <a href="emp_pannel.php?empid=<?php echo $get?>"><button type="button" class="btn btn-info">Back</button></a>
                             </center>
                     </div>
                     </form>

@@ -7,8 +7,9 @@ $payroll_cat = $_POST['payroll_cat']; // monthly (m)a
 $unit_cal = $_POST['unit_cal']; // percentage(p) amount
 $amount = $_POST['amount']; // 100/- or 10%
 $unit_type = $_POST['unit_type']; // fixed (f) change
-$payroll_insert = mysqli_query($connect, "INSERT INTO `payroll`(`payroll_name`, `payroll_type`, `category`, `unit_calculation`, `amount`, `unit_type`, `status`) VALUES ('$payroll_name','$payroll_type','$payroll_cat','$unit_cal','$amount','$unit_type',1)");
-$payroll_select = mysqli_query($connect, "SELECT * FROM `payroll` WHERE `payroll_name` = '$payroll_name' AND `payroll_type` = '$payroll_type' AND `category` = '$payroll_cat' AND `unit_calculation` = '$unit_cal' AND `amount` = '$amount' AND `unit_type` = '$unit_type' AND `status` = 1 ");
+$payroll_insert = mysqli_query($connect, "INSERT INTO `payroll`(`payroll_name`, `payroll_type`, `category`, `unit_calculation`, `unit_type`, `status`) VALUES ('$payroll_name','$payroll_type','$payroll_cat','$unit_cal','$unit_type',1)");
+$payroll_select = mysqli_query($connect, "SELECT * FROM `payroll` WHERE `payroll_name` = '$payroll_name' AND `payroll_type` = '$payroll_type' AND `category` = '$payroll_cat' AND `unit_calculation` = '$unit_cal' AND `unit_type` = '$unit_type' AND `status` = 1 ");
+$salary_insert = mysqli_query($connect, "");
 $payroll_select_fetch = mysqli_fetch_assoc($payroll_select);
 ?>
 <div class="main-panel">
