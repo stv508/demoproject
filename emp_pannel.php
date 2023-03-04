@@ -117,18 +117,23 @@ echo $leave_1_fetch['tot_lev'];
                                             <h4 class="card-title">Earning Details</h4>
                                             <table class="table table-bordered">
                                                 <thead>
+                                                    
                                                     <tr>
                                                         <?php
-                                                        $select_pays = mysqli_query($connect, "SELECT *,CASE WHEN payroll.category = 'm' AND payroll.unit_calculation = 'p' THEN FORMAT((payroll.amount*basic/100),2) END AS pay FROM payroll ,(SELECT  (salary.amount / 12) AS basic FROM salary WHERE `status` = 1 AND emp_id = '$get' ) AS a WHERE payroll.payroll_type = 'e' ");
-                                                        while ($select_pays_fetch = mysqli_fetch_assoc($select_pays)) {
-                                                            // echo "<th>".$select_pays_fetch['payroll_name']." : ".$select_pays_fetch['amount']."</th>";
-                                                            echo "<tr>
-                                                                    <th>" . $select_pays_fetch['payroll_name'] . "</th>
-                                                                    <th>" . $select_pays_fetch['amount'] . "</th>
-                                                                </tr>";
-                                                        }
+                                                            $select_basic = mysqli_query($connect, "SELECT  `amount`,`payroll_name` FROM `salary`,`payroll` WHERE emp_id = '$get'  AND payroll_id = 1 AND payroll.s_no = 1 AND salary.status =1 AND payroll.status = 1  ");
+                                                            while($select_basic_fetch = mysqli_fetch_assoc($select_basic)){
+                                                            echo "<th><a href='salary_details.php?empid=$get'>".$select_basic_fetch['payroll_name']."</a></th>
+                                                                    <th>".$select_basic_fetch['amount']."</th>";
+                                                            }
+                                                            $earns_select = mysqli_query($connect,"SELECT payroll_name,payroll_type,CASE WHEN final.unit_calculation = 'p' THEN FORMAT((base*amount/100),2) ELSE FORMAT(amount,2) END AS eds FROM (SELECT * FROM (SELECT basic.*,salary.emp_id,salary.payroll_id,salary.from_date,salary.to_date,salary.amount,salary.s_no as salSNO FROM (SELECT emp_personal.emp_id AS empID, salary.amount AS base FROM salary,emp_personal WHERE salary.status = 1 AND emp_personal.emp_status = 1 AND salary.emp_id = emp_personal.emp_id AND salary.emp_id = '$get') AS basic LEFT JOIN salary ON salary.emp_id IS NULL AND salary.to_date IS NULL) AS combine LEFT JOIN payroll ON payroll.s_no = combine.payroll_id) AS final WHERE payroll_type = 'e' ");
+                                                            while($earns_fetch = mysqli_fetch_assoc($earns_select)){
+                                                                echo "<tr>
+                                                                <th><a href='salary_details.php?empid=$get'>".$earns_fetch['payroll_name']."</a></th>
+                                                                        <th>".$earns_fetch['eds']."</th>
+                                                                        </tr>";
+                                                                }
                                                         ?>
-                                                    </tr>
+                                                    </tr>                                                        
                                                 </thead>
                                                 <tbody id="holidays">
                                                     <?php    ?>
@@ -141,14 +146,13 @@ echo $leave_1_fetch['tot_lev'];
                                                 <thead>
                                                     <tr>
                                                         <?php
-                                                        $select_pays = mysqli_query($connect, "SELECT * FROM (SELECT `s_no`,`payroll_name`,`payroll_type`,`category`,`status` FROM `payroll` WHERE payroll_type = 'd' ) AS payroll LEFT JOIN salary ON payroll.s_no = salary.payroll_id AND salary.emp_id = '$get' AND payroll.status = 1 AND salary.status = 1  ");
-                                                        while ($select_pays_fetch = mysqli_fetch_assoc($select_pays)) {
-                                                            // echo "<th>".$select_pays_fetch['payroll_name']." : ".$select_pays_fetch['amount']."</th>";
+                                                        $dedus_select = mysqli_query($connect,"SELECT payroll_name,payroll_type,CASE WHEN final.unit_calculation = 'p' THEN FORMAT((base*amount/100),2) ELSE FORMAT(amount,2) END AS eds FROM (SELECT * FROM (SELECT basic.*,salary.emp_id,salary.payroll_id,salary.from_date,salary.to_date,salary.amount,salary.s_no as salSNO FROM (SELECT emp_personal.emp_id AS empID, salary.amount AS base FROM salary,emp_personal WHERE salary.status = 1 AND emp_personal.emp_status = 1 AND salary.emp_id = emp_personal.emp_id AND salary.emp_id = '$get') AS basic LEFT JOIN salary ON salary.emp_id IS NULL AND salary.to_date IS NULL) AS combine LEFT JOIN payroll ON payroll.s_no = combine.payroll_id) AS final WHERE payroll_type = 'd' ");
+                                                        while($dedus_fetch = mysqli_fetch_assoc($dedus_select)){
                                                             echo "<tr>
-                                                                    <th>" . $select_pays_fetch['payroll_name'] . "</th>
-                                                                    <th>" . $select_pays_fetch['amount'] . "</th>
-                                                                </tr>";
-                                                        }
+                                                            <th><a href='salary_details.php?empid=$get'>".$dedus_fetch['payroll_name']."</a></th>
+                                                                    <th>".$dedus_fetch['eds']."</th>
+                                                                    </tr>";
+                                                            }
                                                         ?>
                                                     </tr>
                                                 </thead>

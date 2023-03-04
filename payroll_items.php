@@ -41,9 +41,10 @@ include("header.php");
                                                             $earn_select = mysqli_query($connect, "SELECT * FROM `payroll` WHERE `status` = 1 AND payroll_type = 'e' ");
                                                             $count = 1;
                                                             while ($earn_select_fetch = mysqli_fetch_assoc($earn_select)) {
+                                                                $payid = $earn_select_fetch['s_no'];
                                                                 echo "<tr>
                                                                             <td>" . $count . "</td>
-                                                                            <td>" . $earn_select_fetch['payroll_name'] . "</td>
+                                                                            <td><a href='view_pay_roll.php?payrollid=$payid'>" . $earn_select_fetch['payroll_name'] . "</a></td>
                                                                         </tr>";
                                                                     $count++;
                                                             } ?>
@@ -69,9 +70,10 @@ include("header.php");
                                                             $dedu_select = mysqli_query($connect, "SELECT * FROM `payroll` WHERE `status` = 1 AND payroll_type = 'd' ");
                                                             $count = 1;
                                                             while ($dedu_select_fetch = mysqli_fetch_assoc($dedu_select)) {
+                                                                    $payid = $dedu_select_fetch['s_no'];
                                                                     echo "<tr>
                                                                             <td>" . $count . "</td>
-                                                                            <td>" . $dedu_select_fetch['payroll_name'] . "</td>
+                                                                            <td><a href='view_pay_roll.php?payrollid=$payid'>" . $dedu_select_fetch['payroll_name'] . "</a></td>
                                                                         </tr>";
                                                                     $count++;
                                                             }

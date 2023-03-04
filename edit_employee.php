@@ -44,6 +44,9 @@ $editFetch = mysqli_fetch_assoc($editSel);
             </div>
         </div>
     </div>
+    <?php
+        include("footer.php");
+    ?>
 </div>
 
 <script>

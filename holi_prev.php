@@ -13,7 +13,7 @@ while ($yearFetch = mysqli_fetch_assoc($yearSele)) {
     $count = $count + 1;
 }
 
-
+?>
 
 
 
@@ -96,3 +96,7 @@ while ($yearFetch = mysqli_fetch_assoc($yearSele)) {
 //  	) AS a WHERE emp_id = 'emp3'  AND ( MONTH(from_date) = '2' OR MONTH(to_date) = '2')  AND ( YEAR(from_date) = '2022' OR YEAR(to_date) = '2022') 
 //     	GROUP BY month
 //         ORDER BY month;
+
+<?php
+include("footer.php");
+?>

@@ -103,9 +103,9 @@ include("header.php");
     $('#unitcal').change(function(){
         var unitcal = $('#unitcal').val();
         var amtdiv = "<div class='form-group row'><label class='col-sm-4 col-form-label'>Unit Amount</label><div class='col-sm-8'><input type='text' class='form-control' placeholder='Enter Unit Amount In Rupees' name='amount' required /></div></div>";
-        var perdiv = "<div class='form-group row'><label class='col-sm-4 col-form-label'>Unit Percentage</label><div class='col-sm-8'><input type='text' class='form-control' placeholder='Enter Unit Amount In Percentage' name='amount' required /></div></div>";
+        var perdiv = "<div class='form-group row'><label class='col-sm-4 col-form-label'>Unit Percentage</label><div class='col-sm-8'><input id='unit_calc' type='text' class='form-control' placeholder='Enter Unit Amount In Percentage' name='amount' maxlength='5' required /></div></div>";
         if(unitcal == "p"){
-            console.log(unitcal);
+            // console.log(unitcal);
             $('#unitper').html(perdiv);
         }
         else if(unitcal == "a"){
@@ -115,6 +115,20 @@ include("header.php");
         else{
             $('#unitper').html("");
         }
+        
 
-    });
+
+
+
+        
+        $('#unit_calc').keyup(function(){
+            var per = $("#unit_calc").val();
+
+            if(per > 100 || per < 0 || isNaN(per)){
+                console.log(per);
+                $('#unit_calc').val("");
+            }
+        });
+    });         
+
 </script>

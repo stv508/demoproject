@@ -43,8 +43,14 @@ $holi_remove = mysqli_query($connect, "UPDATE `holidays` SET `status`= 0 WHERE `
                 </div>
             </div>
         </div>
-    </div>
-    <?php
+
+        <?php
     include("footer.php");
-    ?>
+     ?>
+    </div>
+   
+    
 </div>
+
+
+

@@ -43,7 +43,9 @@ $holi_select_fetch = mysqli_fetch_assoc($holi_select);
             </div>
         </div>
     </div>
-    <?php
+    
+</div>
+
+<?php
     include("footer.php");
     ?>
-</div>

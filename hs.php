@@ -50,6 +50,9 @@ $reason = mysqli_query($connect , "SELECT * FROM `reason`");
             </div>
         </div>
     </div>
+    <?php
+    include("footer.php");
+    ?>
 </div>
 <script>
     let reason = document.getElementById("reason");

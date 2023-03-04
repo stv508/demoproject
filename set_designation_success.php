@@ -36,3 +36,6 @@ if(isset($des_insert)){
         </div>
     </div>
 </div>
+<?php
+    include("footer.php");
+    ?>

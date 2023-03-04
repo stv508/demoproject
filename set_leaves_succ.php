@@ -63,6 +63,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         </div>
     </div>
     <?php
+    include("footer.php");
     ?>
     <script>
         noAlpha(document.getElementById("mly"));

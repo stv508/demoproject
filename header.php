@@ -168,13 +168,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="society.php">
                             <i class="fa menu-icon fa-group-arrows-rotate"></i>
                             <span class="menu-title">Societies</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="work.php">
                             <i class="fa menu-icon fa-person-digging"></i>
                             <span class="menu-title">Works</span>
                         </a>

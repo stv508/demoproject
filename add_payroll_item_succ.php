@@ -7,10 +7,23 @@ $payroll_cat = $_POST['payroll_cat']; // monthly (m)a
 $unit_cal = $_POST['unit_cal']; // percentage(p) amount
 $amount = $_POST['amount']; // 100/- or 10%
 $unit_type = $_POST['unit_type']; // fixed (f) change
+
+mysqli_query($connect, "START TRANSACTION");
 $payroll_insert = mysqli_query($connect, "INSERT INTO `payroll`(`payroll_name`, `payroll_type`, `category`, `unit_calculation`, `unit_type`, `status`) VALUES ('$payroll_name','$payroll_type','$payroll_cat','$unit_cal','$unit_type',1)");
 $payroll_select = mysqli_query($connect, "SELECT * FROM `payroll` WHERE `payroll_name` = '$payroll_name' AND `payroll_type` = '$payroll_type' AND `category` = '$payroll_cat' AND `unit_calculation` = '$unit_cal' AND `unit_type` = '$unit_type' AND `status` = 1 ");
-$salary_insert = mysqli_query($connect, "");
 $payroll_select_fetch = mysqli_fetch_assoc($payroll_select);
+$payroll_id = $payroll_select_fetch['s_no'];
+$presentdate = Date("Y-m-d");
+$salary_insert = mysqli_query($connect, "INSERT INTO `salary` (`payroll_id`, `from_date`, `amount`, `status`) VALUES ( '$payroll_id','$presentdate','$amount', 1 )");
+if(isset($payroll_insert) && isset($salary_insert) ){
+    mysqli_query($connect,"COMMIT");
+}
+else{
+    echo "exit";
+    mysqli_query($connect,"ROLLBACK");
+    header("locaion: add_payroll_item.php");
+}
+
 ?>
 <div class="main-panel">
     <div class="content-wrapper">
@@ -65,7 +78,7 @@ $payroll_select_fetch = mysqli_fetch_assoc($payroll_select);
                                                 <div class="form-group row">
                                                     <label class="col-sm-4 col-form-label"><?php if($payroll_select_fetch['unit_calculation'] == "a"){ echo "Amount";}else{echo "Percentage";} ?></label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" value="<?php echo $payroll_select_fetch['amount'];?>" disabled />
+                                                        <input type="text" class="form-control" value="<?php echo $amount;?>" disabled />
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,7 +94,7 @@ $payroll_select_fetch = mysqli_fetch_assoc($payroll_select);
                                                 </div>
                                             </div>
                                             <center>
-                                                <a href="payroll_items.php"><button type="button" class="btn btn-danger">Cancel</button></a>
+                                                <a href="payroll_items.php"><button type="button" class="btn btn-danger">Back</button></a>
                                             </center>
                                         </form>
                                     </div>

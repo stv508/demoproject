@@ -6,15 +6,24 @@ $get = $_GET['empid'];
 $joining_info = mysqli_query($connect, "SELECT emp_doj FROM emp_personal WHERE emp_id = '$get' AND `emp_status` = 1 ");
 $joining_info_fetch = mysqli_fetch_assoc($joining_info);
 $joining_date = $joining_info_fetch['emp_doj'];
-$salary  = mysqli_query($connect, "INSERT INTO `salary`(`emp_id`, `payroll_id`, `from_date`, `amount`, `status`) VALUES ('$get',1,'$joining_date','$basic_pay',1 )");
-$select_salary = mysqli_query($connect, "SELECT amount FROM `salary` WHERE `emp_id` = '$get' AND `payroll_id` = 1 AND `from_date` = '$joining_date' AND `amount` = '$basic_pay' AND `status`  = 1");
-$select_salary_fetch = mysqli_fetch_assoc($select_salary);
 
+$find_emp = mysqli_query($connect, "SELECT * FROM `salary` WHERE `status` = 1 AND emp_id = '$get' ");
+$find_emp_rows = mysqli_num_rows($find_emp);
+
+if($find_emp_rows > 0){
+    $todate = Date("Y-m-d");
+    $update_todate = mysqli_query($connect, "UPDATE `salary` SET`to_date` = '$todate',`status` = 0 WHERE emp_id = '$get' AND `status` = 1 ");
+    $salary  = mysqli_query($connect, "INSERT INTO `salary`(`emp_id`, `payroll_id`, `from_date`, `amount`, `status`) VALUES ('$get',1,'$todate','$basic_pay',1 )");    
+    $select_salary = mysqli_query($connect, "SELECT amount FROM `salary` WHERE `emp_id` = '$get' AND `payroll_id` = 1 AND `from_date` = '$todate' AND `amount` = '$basic_pay' AND `status`  = 1 ");
+}else{
+    $salary  = mysqli_query($connect, "INSERT INTO `salary`(`emp_id`, `payroll_id`, `from_date`, `amount`, `status`) VALUES ('$get',1,'$joining_date','$basic_pay',1 )");
+    $select_salary = mysqli_query($connect, "SELECT amount FROM `salary` WHERE `emp_id` = '$get' AND `payroll_id` = 1 AND `from_date` = '$joining_date' AND `amount` = '$basic_pay' AND `status`  = 1");
+}
+$select_salary_fetch = mysqli_fetch_assoc($select_salary);
 if(!isset($salary)){
     header("location: set_salary.php");
 }
 ?>
-
 <div class="main-panel">
     <div class="content-wrapper">
         <div class="row">
